@@ -1,0 +1,32 @@
+// Obtain ALL anchors on the page.
+links = document.links;
+
+// The previous/next urls if they exist.
+var previous = findHref("prev");
+var next = findHref("next");
+
+/**
+ * Find the href for a given name.
+ * @param {String} The name of the anchor to search for.
+ * @return {String} The href for a given tag, otherwise an empty string.
+ */
+function findHref(name) {
+  for (var index = 0; index < links.length; ++index) {
+    // The complete anchor HTML element (<a>).
+    var anchor = links[index];
+    // Not all anchors have text or rels defined.
+    var rel = (anchor.rel !== undefined) ? anchor.rel : '';
+    var text = (anchor.text !== undefined) ? anchor.text.toLowerCase() : '';
+    if (rel.indexOf(name) > -1 || text.indexOf(name) > -1) return anchor.href;
+  }
+}
+
+// Go to the next/previous pages using the arrow keys.
+document.addEventListener('keydown', function(event) {
+  if(event.keyCode == 37) {
+    if (previous) chrome.extension.sendMessage({redirect: previous});
+  }
+  else if(event.keyCode == 39) {
+    if (next) chrome.extension.sendMessage({redirect: next});
+  }
+});

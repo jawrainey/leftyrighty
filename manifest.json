@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "LeftyRighty",
+  "description": "Navigate to the next or previous page.",
+  "version": "0.0.1",
+
+  "background": { "scripts": ["background.js"] },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"]
+    }
+  ],
+
+  "permissions": ["tabs"]
+}
