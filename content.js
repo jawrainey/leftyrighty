@@ -1,5 +1,5 @@
 // Obtain ALL anchors on the page.
-links = document.links;
+var links = document.links;
 
 // The previous/next urls if they exist.
 var previous = findHref("prev");
@@ -18,7 +18,9 @@ function findHref(name) {
     var rel = (anchor.rel !== undefined) ? anchor.rel : '';
     var text = (anchor.text !== undefined) ? anchor.text.toLowerCase() : '';
     var class_name = (anchor.className !== undefined) ? anchor.className : '';
-    if (rel.indexOf(name) > -1 || text.indexOf(name) > -1 || class_name.indexOf(name) > -1) return anchor.href;
+    if (rel.indexOf(name) > -1 || text.indexOf(name) > -1 || class_name.indexOf(name) > -1) {
+      return anchor.href;
+    }
   }
 }
 
