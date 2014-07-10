@@ -14,10 +14,11 @@ function findHref(name) {
   for (var index = 0; index < links.length; ++index) {
     // The complete anchor HTML element (<a>).
     var anchor = links[index];
-    // Not all anchors have text or rels defined.
+    // Not all anchors have text, rels or classes defined.
     var rel = (anchor.rel !== undefined) ? anchor.rel : '';
     var text = (anchor.text !== undefined) ? anchor.text.toLowerCase() : '';
-    if (rel.indexOf(name) > -1 || text.indexOf(name) > -1) return anchor.href;
+    var class_name = (anchor.className !== undefined) ? anchor.className : '';
+    if (rel.indexOf(name) > -1 || text.indexOf(name) > -1 || class_name.indexOf(name) > -1) return anchor.href;
   }
 }
 
