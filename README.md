@@ -4,7 +4,7 @@ A chrome extension that **enables** navigation to the *previous* or *next* pages
 
 ## Contributing
 
-If you have any suggestions for improvements, feel free to open an [issue](https://github.com/jawrainey/leftyrighty/issues) or make a [pull request](https://github.com/jawrainey/leftyrighty/pulls).
+If you have any suggestions for improvements or discover sites where this extension **does not work correctly** then feel free to open an [issue](https://github.com/jawrainey/leftyrighty/issues) or make a [pull request](https://github.com/jawrainey/leftyrighty/pulls).
 
 ## License
 
