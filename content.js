@@ -2,7 +2,7 @@
 var links = document.links;
 
 // The previous/next urls if they exist.
-var previous = findHref("prev");
+var prev = findHref("prev");
 var next = findHref("next");
 
 /**
@@ -27,7 +27,7 @@ function findHref(name) {
 // Go to the next/previous pages using the arrow keys.
 document.addEventListener('keydown', function(event) {
   if(event.keyCode == 37) {
-    if (previous) chrome.extension.sendMessage({redirect: previous});
+    if (prev) chrome.extension.sendMessage({redirect: prev});
   }
   else if(event.keyCode == 39) {
     if (next) chrome.extension.sendMessage({redirect: next});
