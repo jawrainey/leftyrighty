@@ -10,8 +10,8 @@ If you have any suggestions for improvements or discover sites where this extens
 
 In the case of running locally:
 
-1. Navigate to [chrome://extensions/](chrome://extensions/) in Google Chrome.
-2. Click 'Load unpack extension' and point to this repo on your machine.
+1. Navigate to chrome://extensions/ in Google Chrome.
+2. Click "Load unpack extension" and point to this repo on your machine.
 3. Modify `content.js` with any changes you wish to make, and make a pull request on [github](https://github.com/jawrainey/leftyrighty/pulls).
 4. Rejoice in your glorious contribution to leftyright. Thank you!
 
