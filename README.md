@@ -1,6 +1,6 @@
 # LeftyRighty
 
-A chrome extension that **enables** navigation to the *previous* or *next* pages of a website using the arrow keys.
+A chrome extension that **enables** navigation to the *previous* or *next* pages of a website using the arrow keys. This extension is available on the [Google Chrome store](https://chrome.google.com/webstore/detail/leftyrighty/ejkkakdfmkjmebddkjpplhgoijlhbdid).
 
 ## Contributing
 
