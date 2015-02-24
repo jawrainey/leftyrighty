@@ -3,7 +3,7 @@
 
   "name": "LeftyRighty",
   "description": "Navigate to the next or previous page.",
-  "version": "0.0.1",
+  "version": "0.0.2",
 
   "background": { "scripts": ["background.js"] },
 

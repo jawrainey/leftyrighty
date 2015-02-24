@@ -5,6 +5,10 @@ var links = document.links;
 var prev = findHref(/(prev|back)/i);
 var next = findHref(/(next|forward)/i);
 
+// The first/last urls if they exist.
+var first = findHref(/(first|start|oldest)/i);
+var last = findHref(/(last|end|newest)/i);
+
 /**
  * Find the href for a given name.
  * @param {String} name - The name of the anchor to search for.
@@ -37,9 +41,21 @@ function isNameInAnchor(name, element) {
 // Go to the next/previous pages using the arrow keys.
 document.addEventListener('keydown', function(event) {
   if(event.keyCode == 37) {
-    if (prev) chrome.extension.sendMessage({redirect: prev});
+    if (event.shiftKey) {
+      if (first) chrome.extension.sendMessage({redirect: first});
+    }
+    else
+    {
+      if (prev) chrome.extension.sendMessage({redirect: prev});
+    }
   }
   else if(event.keyCode == 39) {
-    if (next) chrome.extension.sendMessage({redirect: next});
+    if (event.shiftKey) {
+      if (last) chrome.extension.sendMessage({redirect: last});
+    }
+    else
+    {
+      if (next) chrome.extension.sendMessage({redirect: next});
+    }
   }
 });
