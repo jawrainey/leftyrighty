@@ -42,20 +42,20 @@ function isNameInAnchor(name, element) {
 document.addEventListener('keydown', function(event) {
   if(event.keyCode == 37) {
     if (event.shiftKey) {
-      if (first) chrome.extension.sendMessage({redirect: first});
+      if (first) window.location = first;
     }
     else
     {
-      if (prev) chrome.extension.sendMessage({redirect: prev});
+      if (prev) window.location = prev;
     }
   }
   else if(event.keyCode == 39) {
     if (event.shiftKey) {
-      if (last) chrome.extension.sendMessage({redirect: last});
+      if (last) window.location = last;
     }
     else
     {
-      if (next) chrome.extension.sendMessage({redirect: next});
+      if (next) window.location = next;
     }
   }
 });
