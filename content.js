@@ -2,8 +2,8 @@
 var links = document.links;
 
 // The previous/next urls if they exist.
-var prev = findHref("prev");
-var next = findHref("next");
+var prev = findHref(/(prev|back)/i);
+var next = findHref(/(next|forward)/i);
 
 /**
  * Find the href for a given name.
@@ -17,7 +17,7 @@ function findHref(name) {
     // Does the name exist in the anchor?
     if (isNameInAnchor(name, anchor.className) ||
         isNameInAnchor(name, anchor.rel) ||
-        isNameInAnchor(name, anchor.text.toLowerCase()))
+        isNameInAnchor(name, anchor.text))
     {
       return anchor.href
     }
@@ -31,7 +31,7 @@ function findHref(name) {
  * @return {Boolean} True if the name exists in the element, otherwise false.
  */
 function isNameInAnchor(name, element) {
-  return (element !== undefined && element.indexOf(name) > -1);
+  return (element !== undefined && element.search(name) >= 0);
 }
 
 // Go to the next/previous pages using the arrow keys.
