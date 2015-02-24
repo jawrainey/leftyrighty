@@ -15,9 +15,9 @@ function findHref(name) {
     // The complete anchor HTML element (<a>).
     var anchor = links[index];
     // Does the name exist in the anchor?
-    if (isNameInAnchor(name, anchor.rel)  ||
-        isNameInAnchor(name, anchor.text.toLowerCase()) ||
-        isNameInAnchor(name, anchor.className))
+    if (isNameInAnchor(name, anchor.className) ||
+        isNameInAnchor(name, anchor.rel) ||
+        isNameInAnchor(name, anchor.text.toLowerCase()))
     {
       return anchor.href
     }
@@ -31,8 +31,7 @@ function findHref(name) {
  * @return {Boolean} True if the name exists in the element, otherwise false.
  */
 function isNameInAnchor(name, element) {
-  if (element !== undefined && element.indexOf(name) > -1) return true;
-  else return false
+  return (element !== undefined && element.indexOf(name) > -1);
 }
 
 // Go to the next/previous pages using the arrow keys.
