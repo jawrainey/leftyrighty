@@ -7,7 +7,7 @@ var next = findHref(/(next|forward)/i);
 
 // The first/last urls if they exist.
 var first = findHref(/(first|start|oldest)/i);
-var last = findHref(/(last|end|newest)/i);
+var last = findHref(/(last|end|newest|latest)/i);
 
 /**
  * Find the href for a given name.
