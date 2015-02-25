@@ -2,8 +2,12 @@
 var links = document.links;
 
 // The previous/next urls if they exist.
-var prev = findHref("prev");
-var next = findHref("next");
+var prev = findHref(/(prev|back)/i);
+var next = findHref(/(next|forward)/i);
+
+// The first/last urls if they exist.
+var first = findHref(/(first|start|oldest)/i);
+var last = findHref(/(last|end|newest)/i);
 
 /**
  * Find the href for a given name.
@@ -15,9 +19,9 @@ function findHref(name) {
     // The complete anchor HTML element (<a>).
     var anchor = links[index];
     // Does the name exist in the anchor?
-    if (isNameInAnchor(name, anchor.rel)  ||
-        isNameInAnchor(name, anchor.text.toLowerCase()) ||
-        isNameInAnchor(name, anchor.className))
+    if (isNameInAnchor(name, anchor.className) ||
+        isNameInAnchor(name, anchor.rel) ||
+        isNameInAnchor(name, anchor.text))
     {
       return anchor.href
     }
@@ -31,16 +35,27 @@ function findHref(name) {
  * @return {Boolean} True if the name exists in the element, otherwise false.
  */
 function isNameInAnchor(name, element) {
-  if (element !== undefined && element.indexOf(name) > -1) return true;
-  else return false
+  return (element !== undefined && element.search(name) >= 0);
 }
 
 // Go to the next/previous pages using the arrow keys.
 document.addEventListener('keydown', function(event) {
   if(event.keyCode == 37) {
-    if (prev) chrome.extension.sendMessage({redirect: prev});
+    if (event.shiftKey) {
+      if (first) window.location = first;
+    }
+    else
+    {
+      if (prev) window.location = prev;
+    }
   }
   else if(event.keyCode == 39) {
-    if (next) chrome.extension.sendMessage({redirect: next});
+    if (event.shiftKey) {
+      if (last) window.location = last;
+    }
+    else
+    {
+      if (next) window.location = next;
+    }
   }
 });

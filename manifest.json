@@ -3,9 +3,7 @@
 
   "name": "LeftyRighty",
   "description": "Navigate to the next or previous page.",
-  "version": "0.0.1",
-
-  "background": { "scripts": ["background.js"] },
+  "version": "0.0.3",
 
   "content_scripts": [
     {
