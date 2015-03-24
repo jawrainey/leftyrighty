@@ -1,14 +1,14 @@
 (function () {
   // Obtain ALL anchors on the page.
-  var links = document.links;
+  var links = document.links,
 
   // The previous/next urls if they exist.
-  var prev = findHref(/(prev|back)/i);
-  var next = findHref(/(next|forward)/i);
+      prev = findHref(/(prev|back)/i),
+      next = findHref(/(next|forward)/i),
 
   // The first/last urls if they exist.
-  var first = findHref(/(first|start|oldest)/i);
-  var last = findHref(/(last|end|newest|latest)/i);
+      first = findHref(/(first|start|oldest)/i),
+      last = findHref(/(last|end|newest|latest)/i);
 
   /**
    * Find the href for a given name.
