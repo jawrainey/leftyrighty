@@ -16,15 +16,17 @@
    * @return {String} The href for a given tag, otherwise an empty string.
    */
   function findHref(name) {
-    for (var index = 0; index < links.length; ++index) {
+    var anchor,
+      index = 0;
+    for (; index < links.length; index++) {
       // The complete anchor HTML element (<a>).
-      var anchor = links[index];
+      anchor = links[index];
       // Does the name exist in the anchor?
       if (isNameInAnchor(name, anchor.className) ||
           isNameInAnchor(name, anchor.rel) ||
           isNameInAnchor(name, anchor.text))
       {
-        return anchor.href
+        return anchor.href;
       }
     }
   }
