@@ -1,4 +1,5 @@
 (function () {
+  'use strict';
   // Obtain ALL anchors on the page.
   var links = document.links,
 
