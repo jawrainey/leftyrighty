@@ -41,23 +41,20 @@
 
   // Go to the next/previous pages using the arrow keys.
   document.addEventListener('keydown', function(event) {
-    if(event.keyCode == 37) {
-      if (event.shiftKey) {
-        if (first) window.location = first;
-      }
-      else
-      {
-        if (prev) window.location = prev;
-      }
+    if (event.keyCode !== 37 && event.keyCode !== 39) {
+      return;
     }
-    else if(event.keyCode == 39) {
-      if (event.shiftKey) {
-        if (last) window.location = last;
-      }
-      else
-      {
-        if (next) window.location = next;
-      }
+
+    var key = (event.shiftKey && "shift_" || "") + event.keyCode,
+      navTo = {
+        "37": prev,
+        "39": next,
+        "shift_37": first,
+        "shift_39": last
+      }[key];
+
+    if (navTo) {
+      window.location = navTo;
     }
   });
 })();
