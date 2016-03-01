@@ -29,6 +29,18 @@
       {
         return anchor.href;
       }
+      // If we didn't get anything above, try looking in the firstChildElement?
+      // Some webcomics use images for these links instead of text.
+      if (anchor.firstElementChild !== void 0 &&
+          anchor.firstElementChild !== null)
+      {
+        if (isNameInAnchor(name, anchor.firstElementChild.alt) ||
+            isNameInAnchor(name, anchor.firstElementChild.id) ||
+            isNameInAnchor(name, anchor.firstElementChild.src))
+        {
+          return anchor.href;
+        }
+      }
     }
   }
 
