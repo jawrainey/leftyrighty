@@ -34,12 +34,26 @@
       if (anchor.firstElementChild !== void 0 &&
           anchor.firstElementChild !== null)
       {
-        if (isNameInAnchor(name, anchor.firstElementChild.alt) ||
-            isNameInAnchor(name, anchor.firstElementChild.id) ||
+        // Check the firstElementChild's id and src attributes.
+        if (isNameInAnchor(name, anchor.firstElementChild.id) ||
             isNameInAnchor(name, anchor.firstElementChild.src))
         {
           return anchor.href;
         }
+
+        // findHref stops at first match.
+        // On prev and first (line 7 and line 11), I have observed bad matches when searching alt attributes.
+        // The alt attribute may contain things like "Go way back to the first strip!"
+        // which will get picked up by the search for a "prev" link.
+        // Should find a way around this. Disabling for now.
+        // The "first" object is often before the "prev" object in the document, but not sure if this can be useful here.
+        // Might have to leave out alt in an initial search and try to search again if we get no results on the first pass?
+
+        // Check the firstElementChild's alt attribute last.
+        /*if (isNameInAnchor(name, anchor.firstElementChild.alt))
+        {
+          return anchor.href;
+        }*/
       }
     }
   }
