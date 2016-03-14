@@ -4,12 +4,12 @@
   var links = document.links,
 
   // The previous/next urls if they exist.
-      prev = findHref(/(prev|back)/i),
-      next = findHref(/(next|forward)/i),
+  prev = findHref(/(prev|back)/i),
+  next = findHref(/(next|forward)/i),
 
   // The first/last urls if they exist.
-      first = findHref(/(first|start|oldest)/i),
-      last = findHref(/(last|end|newest|latest)/i);
+  first = findHref(/(first|start|oldest)/i),
+  last = findHref(/(last|end|newest|latest)/i);
 
   /**
    * Find the href for a given name.
@@ -17,8 +17,8 @@
    * @return {String} The href for a given tag, otherwise an empty string.
    */
   function findHref(name) {
-    var anchor,
-      index = 0;
+    var anchor, index = 0;
+
     for (; index < links.length; index++) {
       // The complete anchor HTML element (<a>).
       anchor = links[index];
@@ -28,6 +28,16 @@
           isNameInAnchor(name, anchor.text))
       {
         return anchor.href;
+      }
+      // Some webcomics use images for these links instead of text.
+      if (anchor.firstElementChild !== void 0 &&
+          anchor.firstElementChild !== null)
+      {
+        if (isNameInAnchor(name, anchor.firstElementChild.id) ||
+            isNameInAnchor(name, anchor.firstElementChild.src))
+        {
+          return anchor.href;
+        }
       }
     }
   }
