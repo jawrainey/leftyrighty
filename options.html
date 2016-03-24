@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LeftyRighty Options</title>
+<style>
+body { padding: 10px; }
+select#excludedDomains { background: white; width: 300px; }
+</style>
+</head>
+
+<body>
+
+<form id="excludeForm">
+<p>Enter a domain to exclude.</p>
+<input type="text" id="addDomain">
+<button id="add" type="submit">Add Domain</button>
+</form>
+
+<select size="10" id="excludedDomains" name="excludedDomains" multiple>
+</select>
+<button id="remove">Remove Selected Domains</button>
+
+<button id="load">Load Test</button>
+<button id="clear_all_data">Clear all data</button>
+
+<div id="status"></div>
+
+<script src="options.js"></script>
+</body>
+</html>
