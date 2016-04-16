@@ -4,24 +4,72 @@
 <title>LeftyRighty Options</title>
 <style>
 body { padding: 10px; }
-select#excludedDomains { background: white; width: 300px; }
+div#tabs > div {
+  display: block;
+  float: left;
+  background-color: #d8d8d8;
+  padding: 2px;
+  margin: 0px 2px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+div#tabContent { clear: both; margin-bottom: 20px; }
+select#includedDomains, select#excludedDomains { background: white; width: 300px; }
+.hidden { display: none; }
+div#tabs > div.activeTab { background-color: #FAFAFA; border-bottom-style: none; cursor: default; }
+div#mainOptionsTabContent label { display: block; }
 </style>
 </head>
 
 <body>
 
+<div id="tabs">
+<div id="includeTab" class="activeTab">Include List</div>
+<div id="excludeTab">Exclude List</div>
+<div id="mainOptionsTab">Options</div>
+</div>
+
+<div id="tabContent">
+<div id="includeTabContent">
+<form id="includeForm">
+<p>Enter a domain to include.</p>
+<input type="text" id="includeAddDomain">
+<button id="includeAdd" type="submit">Add Domain</button>
+</form>
+
+<select size="10" id="includedDomains" name="includedDomains" multiple>
+</select>
+<button id="includeRemove">Remove Selected Domains</button>
+</div>
+
+<div id="excludeTabContent" class="hidden">
 <form id="excludeForm">
 <p>Enter a domain to exclude.</p>
-<input type="text" id="addDomain">
-<button id="add" type="submit">Add Domain</button>
+<input type="text" id="excludeAddDomain">
+<button id="excludeAdd" type="submit">Add Domain</button>
 </form>
 
 <select size="10" id="excludedDomains" name="excludedDomains" multiple>
 </select>
-<button id="remove">Remove Selected Domains</button>
+<button id="excludeRemove">Remove Selected Domains</button>
+</div>
 
-<button id="load">Load Test</button>
+<div id="mainOptionsTabContent" class="hidden">
+<p>Select an operation mode. Original Mode means that LeftyRighty will 
+not use the Include List or the Exclude List.Include List means that 
+LeftyRighty will only run on pages that match an entry in the Include 
+List. Exclude List means that LeftyRighty will only run on pages that do 
+not match an entry in the Exclude List.</p> 
+<label><input type="radio" name="operationMode" value="originalMode" checked>Original Mode</label>
+<label><input type="radio" name="operationMode" value="includeList">Include List</label>
+<label><input type="radio" name="operationMode" value="excludeList">Exclude List</label>
+</div>
+</div>
+
+
+<button id="load">Load Data</button>
 <button id="clear_all_data">Clear all data</button>
+
 
 <div id="status"></div>
 
