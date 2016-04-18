@@ -1,7 +1,4 @@
 /* TODO:
- *  - allow updates to includeList or excludeList to trigger updateFilters()
- *    without having to change operationMode first
- *    check dotheotherthing at (changedKey === "includedDomainsList")
  */
 
 // add default listeners
@@ -73,7 +70,9 @@ function dotheotherthing(changes, areaName) {
     console.log("  isArray(newValue): " + Array.isArray(newValue));
     // the below line works if we're updating the urlFilter as we're adding items to the domainList
     // but we'd have to check if we're in the right operationMode
-    //updateFilters(buildUrlFilters('hostSuffix', newValue));
+    chrome.storage.sync.get("operationMode", function (items) {
+      updateFilters(newValue, items.operationMode);
+    });
   } else if (changedKey === "operationMode") {
     switchOperationMode(newValue);
   }
@@ -144,7 +143,7 @@ function updateFilters(urlList, mode) {
     console.log("  " + urlList);
     if (mode === "includeList") {
       console.log("adding listener (dothething, {url: urlList})");
-      var urlFilter = buildUrlFilters('hostSuffix', items.includedDomainsList);
+      var urlFilter = buildUrlFilters('hostSuffix', urlList);
       chrome.webNavigation.onCompleted.addListener(dothething, {url: urlFilter});
     } else if (mode === "excludeList") {
       console.log("adding listener (doTheNotThing)");
