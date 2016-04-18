@@ -110,6 +110,7 @@ function doTheNotThing(e, urlFilters) {
 }
 
 // switch operationMode
+// might be able to repurpose this for updating lists
 function switchOperationMode(operationMode) {
   if (operationMode === "originalMode") {
     // we'll just reset the chrome.webNavigation.onCompleted listener
@@ -119,7 +120,7 @@ function switchOperationMode(operationMode) {
   } else if (operationMode === "includeList") {
     console.log("Switching to Include List");
     chrome.storage.sync.get({ includedDomainsList: [] }, function (items) {
-      updateFilters(buildUrlFilters('hostSuffix', items.includedDomainsList), "includeList");
+      updateFilters(items.includedDomainsList, "includeList");
     });
   } else if (operationMode === "excludeList") {
     chrome.storage.sync.get({ excludedDomainsList: [] }, function (items) {
@@ -129,7 +130,7 @@ function switchOperationMode(operationMode) {
 }
 
 // I might need to refactor something here
-function updateFilters(urlFilters, mode) {
+function updateFilters(urlList, mode) {
   if(chrome.webNavigation.onCompleted.hasListener(dothething)) {
     console.log("removing existing listener (dothething)");
     chrome.webNavigation.onCompleted.removeListener(dothething);
@@ -138,17 +139,18 @@ function updateFilters(urlFilters, mode) {
     console.log("removing existing listener (doTheNotThing)");
     chrome.webNavigation.onCompleted.removeListener(_doTheNotThing);
   }
-  if(urlFilters) {
-    console.log("urlFilters got, updating");
-    console.log("  " + urlFilters);
+  if(urlList) {
+    console.log("urlList got, updating");
+    console.log("  " + urlList);
     if (mode === "includeList") {
-      console.log("adding listener (dothething, {url: urlFilters})");
-      chrome.webNavigation.onCompleted.addListener(dothething, {url: urlFilters});
+      console.log("adding listener (dothething, {url: urlList})");
+      var urlFilter = buildUrlFilters('hostSuffix', items.includedDomainsList);
+      chrome.webNavigation.onCompleted.addListener(dothething, {url: urlFilter});
     } else if (mode === "excludeList") {
       console.log("adding listener (doTheNotThing)");
       // FINALLY! Defining _doTheNotThing as a global var and then redefining as a function works!
       chrome.webNavigation.onCompleted.addListener(_doTheNotThing = function(details) {
-        doTheNotThing(details, urlFilters);
+        doTheNotThing(details, urlList);
       });
     }
   } else {
