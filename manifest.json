@@ -5,16 +5,19 @@
   "description": "Navigate to the next or previous page.",
   "version": "0.0.5",
 
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": ["content.js"]
-    }
-  ],
+  "background": {
+    "scripts": ["eventPage.js"],
+    "persistent": false
+  },
 
   "icons": { "16": "./icons/icon16.png",
            "48": "./icons/icon48.png",
           "128": "./icons/icon128.png" },
 
-  "permissions": ["tabs"]
+  "permissions": ["tabs", "storage", "webNavigation", "<all_urls>"],
+
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
 }
