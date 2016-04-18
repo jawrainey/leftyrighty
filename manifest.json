@@ -5,12 +5,6 @@
   "description": "Navigate to the next or previous page.",
   "version": "0.0.5",
 
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": ["content.js"]
-    }
-  ],
   "background": {
     "scripts": ["eventPage.js"],
     "persistent": false
