@@ -25,12 +25,11 @@ chrome.storage.sync.get("operationMode", function (items) {
   } else {
     // if operationMode is undefined, default to originalMode
     console.log ("  operationMode undefined, trying to default to originalMode");
-    chrome.storage.sync.set({ operationMode: "originalMode" }, function () {
-      console.log("  switching operationMode to originalMode");
-      // don't need a specific call to switchOperationMode because of the
-      // chrome.storage.onChanged eventListener above
-      //switchOperationMode("originalMode");
-    });
+    /* Just set operationMode in chrome.storage.sync.
+     * The chrome.storage.onChanged eventListener above will take care of actually
+     * switching the mode.
+     */
+    chrome.storage.sync.set({ operationMode: "originalMode" });
   }
 });
 
