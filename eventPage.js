@@ -2,7 +2,6 @@
  *  - allow updates to includeList or excludeList to trigger updateFilters()
  *    without having to change operationMode first
  *    check dotheotherthing at (changedKey === "includedDomainsList")
- *  - maybe set operationMode to "originalMode" by default?
  */
 
 // add default listeners
@@ -20,7 +19,18 @@ chrome.storage.sync.get("operationMode", function (items) {
    * This can happen on a fresh install, or if operationMode somehow gets cleared/deleted.
    */
   if (items.operationMode) {
+    // if operationMode is defined, switch to that operationMode
+    console.log("  switching operationMode to " + items.operationMode);
     switchOperationMode(items.operationMode);
+  } else {
+    // if operationMode is undefined, default to originalMode
+    console.log ("  operationMode undefined, trying to default to originalMode");
+    chrome.storage.sync.set({ operationMode: "originalMode" }, function () {
+      console.log("  switching operationMode to originalMode");
+      // don't need a specific call to switchOperationMode because of the
+      // chrome.storage.onChanged eventListener above
+      //switchOperationMode("originalMode");
+    });
   }
 });
 
